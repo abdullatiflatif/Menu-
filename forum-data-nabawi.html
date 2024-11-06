@@ -21,7 +21,7 @@
     </div>
     <div class="mb-3">
       <label class="form-label">harga</label>
-      <input type="text" class="form-control" id="input-alamat">
+      <input type="text" class="form-control" id="input-harga">
     </div>
     <button type="submit" class="btn btn-primary" id="tombol-tambah">Simpan</button>
   </form>
@@ -33,12 +33,12 @@
     import { tambahnabawi } from './main.js';
 
     let tombolTambah = document.getElementById('tombol-tambah');
-    let elemenNamanabawi = document.getElementById('input-nama');
-    let elemenharga = document.getElementById('input-harga');
+    let elemenNama = document.getElementById('input-nama');
+    let elemenHarga = document.getElementById('input-harga');
 
     tombolTambah.addEventListener('click', async function(e) {
       e.preventDefault();
-      await tambahnabawi(elemenNamanabawi.value, elemenharga.value);
+      await tambahnabawi(elemenNama.value, elemenHarga.value);
       window.location.href = 'index.html'
     })
   </script>
