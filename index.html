@@ -1,117 +1,111 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu Kafe</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f7f7f7;
-            margin: 0;
-            padding: 20px;
-        }
-        .container {
-            max-width: 800px;
-            margin: auto;
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        h1 {
-            text-align: center;
-            color: #333;
-        }
-        .menu-section {
-            margin-bottom: 30px;
-        }
-        .menu-section h2 {
-            color: #555;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-        }
-        .menu-item {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-        }
-        .menu-item span {
-            color: #666;
-        }
-        .menu-item h3 {
-            margin: 0;
-            color: #333;
-        }
-        .menu-item p {
-            margin: 5px 0 0;
-            font-size: 0.9em;
-            color: #999;
-        }
-        .menu-item .price {
-            color: #28a745;
-            font-weight: bold;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu Kafe</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f7f7f7;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    .menu-section {
+      margin-bottom: 30px;
+    }
+
+    .menu-section h2 {
+      color: #555;
+      border-bottom: 2px solid #eee;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+    }
+
+    .menu-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .menu-item span {
+      color: #666;
+    }
+
+    .menu-item h3 {
+      margin: 0;
+      color: #333;
+    }
+
+    .menu-item p {
+      margin: 5px 0 0;
+      font-size: 0.9em;
+      color: #999;
+    }
+
+    .menu-item .price {
+      color: #28a745;
+      font-weight: bold;
+    }
+  </style>
 </head>
+
 <body>
 
-<div class="container">
-    <h1>Menu</h1>
-.    <h1>nabawi caffe</h1>
-    <!-- Bagian Makanan -->
-    <div class="menu-section">
-        <h2>Makanan</h2>
-        <div class="menu-item">
-            <div>
-                <h3>Nasi Goreng kebuli </h3>
-                <p>Nasi goreng kebuli  dan telur</p>
-            </div>
-            <div class="price">Rp 45.000</div>
-        </div>
-        <div class="menu-item">
-            <div>
-                <h3>Spaghetti Carbonara</h3>
-                <p>Pasta dengan saos barbekyu </p>
-            </div>
-            <div class="price">Rp 45.000</div>
-        </div>
-        <div class="menu-item">
-            <div>
-                <h3>Ayam Goreng + nasi</h3>
-                <p>sop iga bakar</p>
-            </div>
-            <div class="price">Rp 75.000</div>
-        </div>
-    </div>
+  <table class="table" id="daftar-nabawi">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">nama </th>
+        <th scope="col">harga</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
 
-    <!-- Bagian Minuman -->
-    <div class="menu-section">
-        <h2>Minuman</h2>
-        <div class="menu-item">
-            <div>
-                <h3>jus manggo</h3>
-                <p>asam manis segers</p>
-            </div>
-            <div class="price">Rp 25.000</div>
-        </div>
-        <div class="menu-item">
-            <div>
-                <h3>Es Teh Manis</h3>
-                <p>Teh manis dengan es batu</p>
-            </div>
-            <div class="price">Rp 18.000</div>
-        </div>
-        <div class="menu-item">
-            <div>
-                <h3>Jus Alpukat</h3>
-                <p>Jus alpukat segar dengan cokelat</p>
-            </div>
-            <div class="price">Rp 25.000</div>
-        </div>
-    </div>
-</div>
+<script type="module">
+    import { ambilDaftarmenu, formatAngka, } from './main.js';
 
-</body>
-</html>
+    $(document).ready(async function() {
+      let elemennabawi = $("#daftar-nabawi > tbody");
+      let daftarnabawi = await ambilDaftarmenu();   
+      let nomor = 1;
+
+      daftarnabawi.forEach((data) => {
+        elemennabawi.append(
+          '<tr>' +
+          '<th>' + nomor + '</th>' +
+          '<td>' + data.menu + '</td>' +
+          '<td>' + data.harga + '</td>' +
+          '<td class="stack-up">' +
+          ' <a href="#" class="me-2 link-ubah"  data="' +
+          data.id +
+          '">ubah</a> ' +
+          ' <button class="btn btn-danger tombol-hapus" data="' +
+          data.id +
+          '">Hapus</button>' + '</td>' +
+          '</tr>'
+        );
+        nomor = nomor + 1;
+      });
+      </script>
+
+   </body> 
+   </html>
