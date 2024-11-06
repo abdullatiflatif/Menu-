@@ -21,12 +21,12 @@ const firebaseConfig = {
   appId: "1:1094982396668:web:2d103526ab40a59efc0579",
   measurementId: "G-MF48P7VG5P"
 };
-
-// ambil data untuk mapel hari senin
+// Inisialisasi Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-export async function ambilDaftarmenu() {
+//fungsi untuk menampilkan data
+export async function ambilDaftarnabawi() {
   const refDokumen = collection(db, "nabawi");
   const kueri = query(refDokumen, orderBy("nama"));
   const cuplikanKueri = await getDocs(kueri);
@@ -37,8 +37,46 @@ export async function ambilDaftarmenu() {
       id: dok.id,
       nama: dok.data().nama,
       harga: dok.data().harga,
-   
     });
   });
+
+
+
   return hasil;
+}
+//################$#######
+
+export function formatAngka(x) {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+}
+//fungsi untuk menambahkan data
+export async function tambahnabawi(nama, harga,) {
+  try {
+    const dokRef = await addDoc(collection(db, 'nabawi'), {
+      nama: nama,
+      harga: harga,
+    });
+    console.log('berhasil menembah nabawi ' + dokRef.id);
+  } catch (e) {
+    console.log('gagal menambah nabawi ' + e);
+  }
+}
+//#####################
+//fungsi untuk hapus data
+export async function hapusnanawi(docId) {
+  await deleteDoc(doc(db, "nabawi", docId));
+}
+//fungsi untuk ubah data
+export async function ubahnabawi(docId, nama, harga,) {
+  await updateDoc(doc(db, "nabawi", docId), {
+    nama: nama,
+    harga: harga,
+  });
+}
+//fungsi untuk ambil data dan untuk diubah
+export async function ambilnabawi(docId) {
+  const docRef = await doc(db, "nabawi", docId);
+  const docSnap = await getDoc(docRef);
+
+  return await docSnap.data();
 }
