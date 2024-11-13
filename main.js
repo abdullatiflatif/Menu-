@@ -63,7 +63,7 @@ export async function tambahnabawi(nama, harga,) {
 }
 //#####################
 //fungsi untuk hapus data
-export async function hapusnanawi(docId) {
+export async function hapusnabawi(docId) {
   await deleteDoc(doc(db, "nabawi", docId));
 }
 //fungsi untuk ubah data
