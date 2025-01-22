@@ -12,21 +12,21 @@ import {
   updateDoc
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyBm9HdJ92vSLrKRclI6Z2J4bmvlFgR4AuU",
-  authDomain: "mang-yana.firebaseapp.com",
-  projectId: "mang-yana",
-  storageBucket: "mang-yana.appspot.com",
-  messagingSenderId: "1094982396668",
-  appId: "1:1094982396668:web:2d103526ab40a59efc0579",
-  measurementId: "G-MF48P7VG5P"
+  apiKey: "AIzaSyCdgAITXTldockRB_wgxOrbNUPKzSVBhDs",
+  authDomain: "insan-cemerlang-c9554.firebaseapp.com",
+  projectId: "insan-cemerlang-c9554",
+  storageBucket: "insan-cemerlang-c9554.appspot.com",
+  messagingSenderId: "753628555075",
+  appId: "1:753628555075:web:7a72b2d1e8ae89716931f6",
+  measurementId: "G-KMJZ5V0B8H"
 };
 // Inisialisasi Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-//fungsi untuk menampilkan data
-export async function ambilDaftarnabawi() {
+export async function ambildaftarnabawi() {
   const refDokumen = collection(db, "nabawi");
   const kueri = query(refDokumen, orderBy("nama"));
   const cuplikanKueri = await getDocs(kueri);
@@ -39,7 +39,6 @@ export async function ambilDaftarnabawi() {
       harga: dok.data().harga,
     });
   });
-
 
 
   return hasil;
